@@ -1,0 +1,138 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a simple API"
+  version: "1.0.0"
+  title: "Simple Inventory API"
+  contact:
+    email: "you@your-company.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "virtserver.swaggerhub.com"
+basePath: "/lucasdepaula19/LivrariaLucas/1.0.0"
+tags:
+- name: "admins"
+  description: "Secured Admin-only calls"
+- name: "developers"
+  description: "Operations available to regular developers"
+schemes:
+- "https"
+paths:
+  /livro/:
+    get:
+      tags:
+      - "livro"
+      summary: "searches livro"
+      description: "Retorna todos os itens da livraria\n"
+      operationId: "searchLivro"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters: []
+      responses:
+        200:
+          description: "Sucesso"
+          schema:
+            type: "object"
+        400:
+          description: "bad input parameter"
+      x-swagger-router-controller: "Livro"
+    post:
+      tags:
+      - "livro"
+      summary: "add an livro"
+      operationId: "createLivro"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created an livro"
+        required: true
+        schema:
+          $ref: "#/definitions/livro"
+      responses:
+        201:
+          description: "item created"
+        405:
+          description: "invalid input"
+      x-swagger-router-controller: "Livro"
+  /livro/{livroId}:
+    get:
+      tags:
+      - "livro"
+      summary: "find livro by ID"
+      description: "Retorna um livro específico\n"
+      operationId: "getLivroById"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "livroId"
+        in: "path"
+        description: "ID of livro to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "Livro encontrado"
+          schema:
+            $ref: "#/definitions/livro"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Livro not found"
+      x-swagger-router-controller: "Livro"
+    delete:
+      tags:
+      - "livro"
+      summary: "delete livro by ID"
+      description: "Deleta o livro informado\n"
+      operationId: "deleteLivroById"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "livroId"
+        in: "path"
+        description: "ID of delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "Deletado com sucesso"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Livro not found"
+      x-swagger-router-controller: "Livro"
+definitions:
+  livro:
+    type: "object"
+    required:
+    - "autor"
+    - "isbn"
+    - "titulo"
+    properties:
+      isbn:
+        type: "integer"
+        format: "int64"
+      titulo:
+        type: "string"
+        example: "The Origin"
+      autor:
+        type: "string"
+        example: "Lucas de Paula"
+    xml:
+      name: "livro"
+    example:
+      isbn: 0
+      titulo: "The Origin"
+      autor: "Lucas de Paula"

@@ -1,0 +1,61 @@
+﻿GET
+/v1/publico/livro/{ISBN}
+/v1/publico/titulo/{TITLE}
+/v1/publico/autor/{NAME}
+/v1/publico/genero/{TAG}
+
+
+POST
+/v1/publico/livro
+/v1/publico/usuario
+/v1/publico/autor
+/v1/publico/genero
+/v1/publico/livro/comentario
+
+
+DELETE
+
+
+/v1/publico/livro/{ISBN}
+/v1/publico/usuario/{ID}
+/v1/publico/autor/{ID}
+/v1/publico/genero/{ID}
+
+
+PUT
+
+
+/v1/publico/livro/{ISBN}
+/v1/publico/usuario/{ID}
+/v1/publico/autor/{ID}
+/v1/publico/genero/{ID}
+
+
+BODY
+
+
+Livro
+{
+        ISBN
+        TITULO
+        AUTOR
+        GENERO
+        DATA
+        PRECO
+        UNIDADES_VENDIDAS
+}
+
+
+Usuario
+{
+ID
+NOME
+EMAIL
+SENHA
+}
+
+
+Autor{
+ID
+Nome
+}
